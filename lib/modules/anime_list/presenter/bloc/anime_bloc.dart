@@ -21,13 +21,11 @@ class AnimeController extends Bloc<AnimeEvent, AnimeState> {
     emit(SuccessAnimeState(animes));
   }
 
-  // final _stub = TextEditingController(text: 'jujutsu_kaisen');
-  final animeTextController = TextEditingController();
-
   Future<void> _getFactList(AnimeEvent event, Emitter<AnimeState> emit) async {
     emit(LoadingAnimeState(true));
-    final facts =
-        await getFactListUsecase.call(anime: animeTextController.value.text);
-    emit(SuccessFactState(facts));
+    if (event is AnimeParameterEvent) {
+      final facts = await getFactListUsecase.call(anime: event.anime);
+      emit(SuccessFactState(facts));
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:anime_facts_bloc/modules/anime_list/domain/usecases/get_anime_li
 import 'package:anime_facts_bloc/modules/anime_list/domain/usecases/get_fact_list.dart';
 import 'package:anime_facts_bloc/modules/anime_list/presenter/bloc/anime_bloc.dart';
 import 'package:anime_facts_bloc/modules/anime_list/presenter/view/anime_page.dart';
+import 'package:anime_facts_bloc/modules/anime_list/presenter/view/facts_page.dart';
 import 'package:anime_facts_bloc/modules/anime_list/repository/anime_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -20,6 +21,9 @@ class AnimeModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const AnimePage()),
-        ChildRoute('/fact', child: (context, args) => Container()),
+        ChildRoute('/fact',
+            child: (context, args) => FactsPage(
+                  animeName: args.data,
+                )),
       ];
 }

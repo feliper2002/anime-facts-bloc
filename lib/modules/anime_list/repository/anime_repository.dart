@@ -27,7 +27,6 @@ class AnimeRepositoryImpl implements AnimeRepository {
       for (var anime in data) {
         final animeResponse = Anime.fromMap(anime);
         animes.add(animeResponse);
-        // print("Adicionou ${animeResponse.name}");
       }
       return animes;
     } on UnoError catch (e) {

@@ -20,6 +20,11 @@ class _AnimePageState extends State<AnimePage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
@@ -32,21 +37,26 @@ class _AnimePageState extends State<AnimePage> {
               itemCount: state.animes.length,
               itemBuilder: (_, index) {
                 final anime = state.animes[index];
-                return Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 10,
-                  ),
-                  child: Column(
-                    children: [
-                      Image.network(anime.image!),
-                      Text(
-                        anime.name!,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
+                return GestureDetector(
+                  onTap: () async {
+                    await Modular.to.pushNamed('/fact', arguments: anime.name);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 10,
+                    ),
+                    child: Column(
+                      children: [
+                        Image.network(anime.image!),
+                        Text(
+                          anime.name!,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },
