@@ -27,7 +27,9 @@ class _AnimePageState extends State<AnimePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Anime BLoC'),
+      ),
       body: BlocBuilder<AnimeController, AnimeState>(
         bloc: Modular.get<AnimeController>(),
         builder: (_, state) {
