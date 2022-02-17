@@ -22,35 +22,41 @@ class _FactsPageState extends State<FactsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.animeName!),
-      ),
-      body: BlocBuilder<AnimeController, AnimeState>(
-        bloc: Modular.get<AnimeController>(),
-        builder: (context, state) {
-          if (state is SuccessFactState) {
-            return ListView.builder(
-              itemCount: state.facts.length,
-              itemBuilder: (context, index) {
-                final fact = state.facts[index];
+    return WillPopScope(
+      onWillPop: () async {
+        Modular.get<AnimeController>().add(InitialEvent());
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.animeName!),
+        ),
+        body: BlocBuilder<AnimeController, AnimeState>(
+          bloc: Modular.get<AnimeController>(),
+          builder: (context, state) {
+            if (state is SuccessFactState) {
+              return ListView.builder(
+                itemCount: state.facts.length,
+                itemBuilder: (context, index) {
+                  final fact = state.facts[index];
 
-                return Container(
-                  margin: const EdgeInsetsDirectional.all(20),
-                  child: Text(fact.fact!),
-                );
-              },
-            );
-          }
-          if (state is LoadingAnimeState) {
+                  return Container(
+                    margin: const EdgeInsetsDirectional.all(20),
+                    child: Text(fact.fact!),
+                  );
+                },
+              );
+            }
+            if (state is LoadingAnimeState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
             return const Center(
               child: CircularProgressIndicator(),
             );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+          },
+        ),
       ),
     );
   }
