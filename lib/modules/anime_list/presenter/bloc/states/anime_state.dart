@@ -1,5 +1,5 @@
-import 'package:anime_facts_bloc/modules/anime_list/domain/models/anime.dart';
-import 'package:anime_facts_bloc/modules/anime_list/domain/models/fact.dart';
+import 'package:anime_facts_bloc/modules/anime_list/infra/models/anime_model.dart';
+import 'package:anime_facts_bloc/modules/anime_list/infra/models/fact_model.dart';
 
 abstract class AnimeState {}
 
@@ -12,15 +12,19 @@ class LoadingAnimeState extends AnimeState {
 }
 
 class SuccessAnimeState extends AnimeState {
-  final List<Anime> animes;
+  final List<AnimeModel> animes;
 
   SuccessAnimeState(this.animes);
 }
 
-class ErrorAnimeState extends AnimeState {}
+class ErrorAnimeState extends AnimeState {
+  final String message;
+
+  ErrorAnimeState(this.message);
+}
 
 class SuccessFactState extends AnimeState {
-  final List<Fact> facts;
+  final List<FactModel> facts;
 
   SuccessFactState(this.facts);
 }

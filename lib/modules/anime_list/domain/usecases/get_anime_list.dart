@@ -1,8 +1,8 @@
-import 'package:anime_facts_bloc/modules/anime_list/domain/models/anime.dart';
-import 'package:anime_facts_bloc/modules/anime_list/repository/anime_repository.dart';
+import 'package:anime_facts_bloc/modules/anime_list/domain/repositories/anime_repository.dart';
+import 'package:anime_facts_bloc/modules/anime_list/infra/models/anime_model.dart';
 
 abstract class GetAnimeList {
-  Future<List<Anime>> call();
+  Future<List<AnimeModel>> call();
 }
 
 class GetAnimeListImpl implements GetAnimeList {
@@ -11,7 +11,7 @@ class GetAnimeListImpl implements GetAnimeList {
   GetAnimeListImpl(this.repository);
 
   @override
-  Future<List<Anime>> call() async {
+  Future<List<AnimeModel>> call() async {
     return await repository.getAnimeList();
   }
 }
