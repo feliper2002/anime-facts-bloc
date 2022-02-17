@@ -4,7 +4,6 @@ import 'package:anime_facts_bloc/modules/anime_list/presenter/bloc/anime_bloc.da
 import 'package:anime_facts_bloc/modules/anime_list/presenter/view/anime_page.dart';
 import 'package:anime_facts_bloc/modules/anime_list/presenter/view/facts_page.dart';
 import 'package:anime_facts_bloc/modules/anime_list/repository/anime_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:uno/uno.dart';
 
