@@ -2,7 +2,6 @@ import 'package:anime_facts_bloc/modules/anime_list/domain/usecases/get_anime_li
 import 'package:anime_facts_bloc/modules/anime_list/domain/usecases/get_fact_list.dart';
 import 'package:anime_facts_bloc/modules/anime_list/presenter/bloc/events/anime_event.dart';
 import 'package:anime_facts_bloc/modules/anime_list/presenter/bloc/states/anime_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnimeController extends Bloc<AnimeEvent, AnimeState> {
