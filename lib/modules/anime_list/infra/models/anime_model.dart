@@ -21,8 +21,8 @@ class AnimeModel extends Anime {
 
   factory AnimeModel.fromMap(Map<String, dynamic> map) {
     return AnimeModel(
-      name: map['name'] ?? '',
-      image: map['image'] ?? '',
+      name: map['anime_name'] ?? '',
+      image: map['anime_img'] ?? '',
     );
   }
 
