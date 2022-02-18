@@ -17,7 +17,7 @@ class AnimeController extends Bloc<AnimeEvent, AnimeState> {
   Future<void> _getAnimeList(AnimeEvent event, Emitter<AnimeState> emit) async {
     emit(LoadingAnimeState(true));
     try {
-      final animes = await getAnimeListUsecase.call();
+      final animes = await getAnimeListUsecase();
       emit(SuccessAnimeState(animes));
     } catch (e) {
       emit(ErrorAnimeState("$e"));
@@ -28,7 +28,7 @@ class AnimeController extends Bloc<AnimeEvent, AnimeState> {
     emit(LoadingAnimeState(true));
     if (event is AnimeParameterEvent) {
       try {
-        final facts = await getFactListUsecase.call(anime: event.anime);
+        final facts = await getFactListUsecase(anime: event.anime);
         emit(SuccessFactState(facts));
       } catch (e) {
         emit(ErrorAnimeState("$e"));

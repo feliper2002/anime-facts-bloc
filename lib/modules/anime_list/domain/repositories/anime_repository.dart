@@ -1,7 +1,7 @@
-import 'package:anime_facts_bloc/modules/anime_list/infra/models/anime_model.dart';
-import 'package:anime_facts_bloc/modules/anime_list/infra/models/fact_model.dart';
+import 'package:anime_facts_bloc/modules/anime_list/domain/entities/anime.dart';
+import 'package:anime_facts_bloc/modules/anime_list/domain/entities/fact.dart';
 
 abstract class AnimeRepository {
-  Future<List<AnimeModel>> getAnimeList();
-  Future<List<FactModel>> getFactList({String? anime});
+  Future<List<Anime>> getAnimeList();
+  Future<List<Fact>> getFactList({String? anime});
 }

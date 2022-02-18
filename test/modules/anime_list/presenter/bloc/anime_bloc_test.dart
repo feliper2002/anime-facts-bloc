@@ -1,3 +1,5 @@
+import 'package:anime_facts_bloc/modules/anime_list/domain/entities/anime.dart';
+import 'package:anime_facts_bloc/modules/anime_list/domain/entities/fact.dart';
 import 'package:anime_facts_bloc/modules/anime_list/domain/repositories/anime_repository.dart';
 import 'package:anime_facts_bloc/modules/anime_list/domain/usecases/get_anime_list.dart';
 import 'package:anime_facts_bloc/modules/anime_list/domain/usecases/get_fact_list.dart';
@@ -30,7 +32,7 @@ void main() {
       "Should return an SuccessAnimeState",
       build: () {
         when(() => repository.getAnimeList())
-            .thenAnswer((_) async => <AnimeModel>[]);
+            .thenAnswer((_) async => <Anime>[]);
 
         return AnimeController(getAnimeListUsecase, getFactListUsecase);
       },
@@ -45,7 +47,7 @@ void main() {
       "Should return an SuccessFactState",
       build: () {
         when(() => repository.getFactList(anime: "jujutsu_kaisen"))
-            .thenAnswer((_) async => <FactModel>[]);
+            .thenAnswer((_) async => <Fact>[]);
 
         return AnimeController(getAnimeListUsecase, getFactListUsecase);
       },
@@ -61,7 +63,7 @@ void main() {
       "Should return an SuccessAnimeState",
       build: () {
         when(() => repository.getAnimeList())
-            .thenAnswer((_) async => <AnimeModel>[]);
+            .thenAnswer((_) async => <Anime>[]);
 
         return AnimeControllerCubit(getAnimeListUsecase, getFactListUsecase);
       },
@@ -76,7 +78,7 @@ void main() {
       "Should return an SuccessFactState",
       build: () {
         when(() => repository.getFactList(anime: "jujutsu_kaisen"))
-            .thenAnswer((_) async => <FactModel>[]);
+            .thenAnswer((_) async => <Fact>[]);
 
         return AnimeControllerCubit(getAnimeListUsecase, getFactListUsecase);
       },
@@ -89,8 +91,7 @@ void main() {
     blocTest<AnimeControllerCubit, AnimeState>(
       "Should return an ErrorAnimeState if anime name is empty",
       build: () {
-        when(() => repository.getFactList())
-            .thenAnswer((_) async => <FactModel>[]);
+        when(() => repository.getFactList()).thenAnswer((_) async => <Fact>[]);
 
         return AnimeControllerCubit(getAnimeListUsecase, getFactListUsecase);
       },

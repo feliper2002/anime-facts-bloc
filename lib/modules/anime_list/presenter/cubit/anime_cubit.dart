@@ -13,7 +13,7 @@ class AnimeControllerCubit extends Cubit<AnimeState> {
   Future<void> getAnimeList() async {
     emit(LoadingAnimeState(true));
     try {
-      final animes = await _getAnimeListUsecase.call();
+      final animes = await _getAnimeListUsecase();
       emit(SuccessAnimeState(animes));
     } catch (e) {
       emit(ErrorAnimeState("$e"));
@@ -23,7 +23,7 @@ class AnimeControllerCubit extends Cubit<AnimeState> {
   Future<void> getFactList({String? anime}) async {
     emit(LoadingAnimeState(true));
     try {
-      final facts = await _getFactListUsecase.call(anime: anime);
+      final facts = await _getFactListUsecase(anime: anime);
       assert(anime != null && anime.isNotEmpty);
       emit(SuccessFactState(facts));
     } on AssertionError catch (e) {

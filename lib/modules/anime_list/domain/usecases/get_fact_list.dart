@@ -1,8 +1,8 @@
+import 'package:anime_facts_bloc/modules/anime_list/domain/entities/fact.dart';
 import 'package:anime_facts_bloc/modules/anime_list/domain/repositories/anime_repository.dart';
-import 'package:anime_facts_bloc/modules/anime_list/infra/models/fact_model.dart';
 
 abstract class GetFactList {
-  Future<List<FactModel>> call({String? anime});
+  Future<List<Fact>> call({String? anime});
 }
 
 class GetFactListImpl implements GetFactList {
@@ -11,7 +11,7 @@ class GetFactListImpl implements GetFactList {
   GetFactListImpl(this.repository);
 
   @override
-  Future<List<FactModel>> call({String? anime}) async {
+  Future<List<Fact>> call({String? anime}) async {
     return await repository.getFactList(anime: anime);
   }
 }
