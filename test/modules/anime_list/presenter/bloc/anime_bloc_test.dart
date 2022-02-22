@@ -61,21 +61,6 @@ void main() {
     );
 
     blocTest<AnimeController, AnimeState>(
-      "Should return an SuccessAnimeState : getAnimeList()",
-      build: () {
-        when(() => repository.getAnimeList())
-            .thenAnswer((_) async => fakeAnimeList);
-
-        return AnimeController(getAnimeListUsecase, getFactListUsecase);
-      },
-      act: (bloc) => bloc.add(InitialEvent()),
-      expect: () => [
-        isA<LoadingAnimeState>(),
-        isA<SuccessAnimeState>(),
-      ],
-    );
-
-    blocTest<AnimeController, AnimeState>(
       "Should return an SuccessFactState : getFactList()",
       build: () {
         when(() => repository.getFactList(anime: "jujutsu_kaisen"))
@@ -149,7 +134,7 @@ void main() {
       ],
     );
     blocTest<AnimeControllerCubit, AnimeState>(
-      "Should return an ErrorAnimeState if anime name is empty",
+      "Should return an ErrorAnimeState if anime name is empty : getFactList()",
       build: () {
         when(() => repository.getFactList()).thenAnswer((_) async => <Fact>[]);
 
