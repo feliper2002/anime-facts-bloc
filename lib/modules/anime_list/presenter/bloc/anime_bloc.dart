@@ -18,8 +18,9 @@ class AnimeController extends Bloc<AnimeEvent, AnimeState> {
     emit(LoadingAnimeState(true));
     try {
       final animes = await getAnimeListUsecase();
+      assert(animes.isNotEmpty);
       emit(SuccessAnimeState(animes));
-    } catch (e) {
+    } on AssertionError catch (e) {
       emit(ErrorAnimeState("$e"));
     }
   }

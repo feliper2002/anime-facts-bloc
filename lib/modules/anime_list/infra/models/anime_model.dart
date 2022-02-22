@@ -12,22 +12,10 @@ class AnimeModel extends Anime {
     this.image,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'image': image,
-    };
-  }
-
   factory AnimeModel.fromMap(Map<String, dynamic> map) {
     return AnimeModel(
       name: map['anime_name'] ?? '',
       image: map['anime_img'] ?? '',
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory AnimeModel.fromJson(String source) =>
-      AnimeModel.fromMap(json.decode(source));
 }

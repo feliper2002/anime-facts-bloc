@@ -14,8 +14,9 @@ class AnimeControllerCubit extends Cubit<AnimeState> {
     emit(LoadingAnimeState(true));
     try {
       final animes = await _getAnimeListUsecase();
+      assert(animes.isNotEmpty);
       emit(SuccessAnimeState(animes));
-    } catch (e) {
+    } on AssertionError catch (e) {
       emit(ErrorAnimeState("$e"));
     }
   }
