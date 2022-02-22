@@ -12,10 +12,18 @@ class UnoMock extends Mock implements Uno {}
 void main() {
   late UnoMock client;
   late AnimeDataSource dataSource;
+  late List<AnimeModel> fakeAnimeList;
+  late List<AnimeModel> fakeAnimeListEmpty;
+  late List<FactModel> fakeFactList;
+  late List<FactModel> fakeFactListEmpty;
 
   setUpAll(() {
     client = UnoMock();
     dataSource = AnimeDatasourceImpl(client);
+    fakeAnimeList = <AnimeModel>[AnimeModel(), AnimeModel(), AnimeModel()];
+    fakeAnimeListEmpty = <AnimeModel>[];
+    fakeFactList = <FactModel>[FactModel(), FactModel(), FactModel()];
+    fakeFactListEmpty = <FactModel>[];
   });
 
   test('Should return an List<AnimeModel>', () async {
@@ -35,6 +43,23 @@ void main() {
     expect(result, isA<List<AnimeModel>>());
   });
 
+  test('Should throws an UnoError', () async {
+    when(() => client.get(any())).thenAnswer((_) async => Response(
+          headers: {},
+          request: Request(
+              uri: Uri(),
+              method: 'GET',
+              headers: {},
+              timeout: const Duration()),
+          status: 401,
+          data: animeListJSON,
+        ));
+
+    final result = await dataSource.getAnimeList();
+
+    expect(result, throwsA(isA<UnoError>()));
+  });
+
   test('Should return an List<FactModel>', () async {
     when(() => client.get(any())).thenAnswer((_) async => Response(
           headers: {},
@@ -50,5 +75,22 @@ void main() {
     final result = await dataSource.getFactList(anime: 'jujutsu_kaisen');
 
     expect(result, isA<List<FactModel>>());
+  });
+
+  test('Should throes an UnoError', () async {
+    when(() => client.get(any())).thenAnswer((_) async => Response(
+          headers: {},
+          request: Request(
+              uri: Uri(),
+              method: 'GET',
+              headers: {},
+              timeout: const Duration()),
+          status: 401,
+          data: jujutsuFactsJSON,
+        ));
+
+    final result = await dataSource.getFactList(anime: '');
+
+    expect(result, throwsA(isA<UnoError>()));
   });
 }

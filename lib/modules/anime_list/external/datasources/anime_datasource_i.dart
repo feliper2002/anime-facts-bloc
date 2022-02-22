@@ -13,8 +13,9 @@ class AnimeDatasourceImpl implements AnimeDataSource {
   @override
   Future<List<AnimeModel>> getAnimeList() async {
     final response = await client.get(url);
-
     try {
+      assert(response.status == 200);
+
       final responseData = response.data as Map;
       final data = responseData['data'] as List;
 
@@ -25,10 +26,8 @@ class AnimeDatasourceImpl implements AnimeDataSource {
         animes.add(animeResponse);
       }
       return animes;
-    } on UnoError catch (e) {
-      throw e.message;
-    } catch (e) {
-      throw "$e";
+    } on AssertionError catch (e) {
+      throw UnoError("$e");
     }
   }
 
@@ -37,6 +36,8 @@ class AnimeDatasourceImpl implements AnimeDataSource {
     final response = await client.get("$url/$anime");
 
     try {
+      assert(response.status == 200);
+
       final responseData = response.data as Map;
       final data = responseData['data'] as List;
 
@@ -47,10 +48,8 @@ class AnimeDatasourceImpl implements AnimeDataSource {
         facts.add(factResponse);
       }
       return facts;
-    } on UnoError catch (e) {
-      throw e.message;
-    } catch (e) {
-      throw "$e";
+    } on AssertionError catch (e) {
+      throw UnoError("$e");
     }
   }
 }
