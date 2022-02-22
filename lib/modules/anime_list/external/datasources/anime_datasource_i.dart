@@ -36,7 +36,7 @@ class AnimeDatasourceImpl implements AnimeDataSource {
     final response = await client.get("$url/$anime");
 
     try {
-      assert(response.status == 200);
+      assert(anime!.isNotEmpty);
 
       final responseData = response.data as Map;
       final data = responseData['data'] as List;

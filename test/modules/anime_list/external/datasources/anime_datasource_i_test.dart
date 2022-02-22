@@ -77,7 +77,7 @@ void main() {
     expect(result, isA<List<FactModel>>());
   });
 
-  test('Should throes an UnoError', () async {
+  test('Should throws an UnoError if `anime` is empty', () async {
     when(() => client.get(any())).thenAnswer((_) async => Response(
           headers: {},
           request: Request(
